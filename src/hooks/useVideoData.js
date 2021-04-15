@@ -1,9 +1,9 @@
-import {useState} from 'react';
+import { useState } from 'react';
 
 
 const init = []
 const initPlay = {
-  show: true,
+  show: false,
   location: ''
 }
 
