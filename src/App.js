@@ -20,7 +20,7 @@ function App() {
   } = useContext(AppContext);
 
   const onHide = () => {
-    setPlay({show:false, location:''})
+    setPlay({ show: false, location: '' })
   }
 
   return (
@@ -35,13 +35,10 @@ function App() {
         <Redirect to={auth ? '/home' : '/auth'} />
       </Router>
       <Updates />
-      {
-        play.show &&
-      <VideoModal 
-      onHide={onHide}
-      show={play.show}
-      src={play.location}/>
-      }
+      <VideoModal
+        onHide={onHide}
+        show={play.show}
+        src={play.location} />
     </div>
   );
 }

@@ -11,7 +11,11 @@ const VideoPreview = ({ src }) => {
 
 
   return (
-    <>
+    <div style={{
+      display:'flex',
+      flexDirection:'column',
+      alignItems:'center'
+    }}>
       <video style={{
         width: 240,
         height: 180
@@ -19,11 +23,16 @@ const VideoPreview = ({ src }) => {
         <source src={src}>
         </source>
       </video>
-      <Button onClick={() => setPlay({show: true, location: src})}>
+      <Button 
+      style={{
+        width:60,
+        height:40
+      }}
+      onClick={() => setPlay({show: true, location: src})}>
         Play
     </Button>
 
-    </>
+    </div>
   )
 }
 export default VideoPreview;

@@ -54,10 +54,13 @@
 .custom-file {
   width:100px;
 }
-.modal-content {
-  width: auto;
-  margin: 0 auto;
-}
-.modal-body {
-  @include flexbox(row, center, center);
+#video-player {
+
+  .modal-content {
+    width: auto;
+    margin: 0 auto;
+  }
+  .modal-body {
+    @include flexbox(row, center, center);
+  }
 }
