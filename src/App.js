@@ -1,23 +1,47 @@
-import logo from './logo.svg';
-import './App.css';
+import {
+  BrowserRouter as Router,
+  Redirect,
+  Switch, Route
+} from 'react-router-dom';
+
+import routes from 'routes';
+import NavBar from 'components/NavBar'
+import Updates from 'components/Updates'
+import AppContext from 'AppContext';
+import { useContext } from 'react';
+import VideoModal from 'components/VideoModal';
 
 function App() {
+
+  const {
+    auth,
+    play,
+    setPlay
+  } = useContext(AppContext);
+
+  const onHide = () => {
+    setPlay({show:false, location:''})
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Router>
+        <NavBar />
+        <Switch>
+          {routes.map(each => <Route
+            {...each}
+          />)}
+        </Switch>
+        <Redirect to={auth ? '/home' : '/auth'} />
+      </Router>
+      <Updates />
+      {
+        play.show &&
+      <VideoModal 
+      onHide={onHide}
+      show={play.show}
+      src={play.location}/>
+      }
     </div>
   );
 }
