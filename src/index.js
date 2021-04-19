@@ -5,6 +5,11 @@ import App from './App';
 import 'styles/login.scss';
 import 'styles/index.scss';
 import { AppProvider } from 'AppContext';
+import axios from 'axios';
+
+if (process.env.REACT_APP_API_BASE_URL) {
+  axios.defaults.baseURL = process.env.REACT_APP_API_BASE_URL;
+}
 
 ReactDOM.render(
   <React.StrictMode>
