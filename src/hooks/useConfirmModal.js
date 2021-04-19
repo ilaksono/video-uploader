@@ -5,7 +5,8 @@ const init = {
   body: '',
   title: '',
   btnText: 'Submit',
-  confirm: null
+  confirm: null,
+  cancel: null
 }
 
 const useConfirmModal = () => {
@@ -16,19 +17,14 @@ const useConfirmModal = () => {
     setConMod(init);
   }
 
-  const createModal = (body, title, confirm = null, btnText = 'Submit') => {
-    setConMod({show: true, body, title, btnText, confirm});
-  }
-
-  const handleModalConfirm = (confirm) => {
-    setConMod(prev => ({...prev, confirm}))
+  const createModal = (body, title, confirm = null, cancel = null, btnText = 'Submit') => {
+    setConMod({show: true, body, title, btnText, confirm, cancel});
   }
 
   return {
     conMod,
     resetConfirmModal,
     createModal,
-    handleModalConfirm
   }
 }
 export default useConfirmModal;

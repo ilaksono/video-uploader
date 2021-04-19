@@ -1,27 +1,40 @@
 import VideoPreview from 'components/VideoPreview';
 import AppContext from 'AppContext';
-import {useContext} from 'react';
+import { useContext, useEffect } from 'react';
 
 export default () => {
 
   const {
-    videos
+    auth,
+    videos,
+    fetchVideosAPI
   } = useContext(AppContext);
 
+  useEffect(() => {
+    fetchVideosAPI(auth)
+  }, [auth])
+
   return (
-    <div className='dashboard-box'>
-      <div
-      style={{
-        display:'grid',
-        gridTemplateColumns: 'repeat(3, 1fr)'
-      }}
-      >
-        {
-          videos.map((each, i) => <VideoPreview 
-          key={i}
-          src={each.location}
-          />)
-        }
+    <div style={{
+      width: '100vw',
+      height: '100vh',
+      backgroundImage: `url('/homebg.jpeg')`,
+      backgroundRepeat: 'no-repeat',
+      backgroundSize: 'cover',
+      paddingTop: 24
+    }}>
+
+      <div className='dashboard-box'>
+        <div
+        className='video-grid'
+        >
+          {
+            videos.map((each, i) => <VideoPreview
+              key={i}
+              {...each}
+            />)
+          }
+        </div>
       </div>
     </div>
   )

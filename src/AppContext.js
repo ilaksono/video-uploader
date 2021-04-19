@@ -17,14 +17,14 @@ export const AppProvider = ({ children }) => {
     videos,
     setVideos,
     play,
-    setPlay
+    setPlay,
+    fetchVideosAPI
   } = useVideoData();
 
   const {
     conMod,
     resetConfirmModal,
     createModal,
-    handleModalConfirm
   } = useConfirmModal();
 
   return (
@@ -37,13 +37,13 @@ export const AppProvider = ({ children }) => {
       conMod,
       resetConfirmModal,
       createModal,
-      handleModalConfirm,
 
       // videoData
       videos,
       setVideos,
       play,
       setPlay,
+      fetchVideosAPI,
     }}>
       {children}
     </AppContext.Provider>

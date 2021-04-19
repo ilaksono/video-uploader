@@ -1,4 +1,4 @@
-@import './helpers.scss';
+@import "./helpers.scss";
 .public-err-container {
   box-shadow: 0 0 2px 2px pink;
   color: red;
@@ -21,7 +21,10 @@
   width: 100%;
   overflow-x: auto;
 }
-
+$theme-colors: (
+  "og": #e46f16,
+  "main": "#00acc1",
+);
 
 .dashboard-box {
   width: 95%;
@@ -34,33 +37,67 @@
   padding: 36px;
   padding-left: 40px;
   padding-right: 40px;
-  margin:24px;
+  margin: 24px;
+  // margin-top:auto;
+  // background-color: 	#fef1d2DD;
+  background: rgb(106, 135, 199);
+  background: linear-gradient(180deg, rgba(106, 135, 199, 0.95) 50%, rgba(17, 201, 77, 0.6) 100%);
   position: relative;
+  overflow-y: auto;
 }
 
 .custom-file-label {
-  padding:0;
+  padding: 0;
   margin: 0;
   background-color: transparent;
   border: none;
-  width:100px;
+  width: 80px;
   &::after {
-    content:none !important;
+    content: none !important;
   }
 }
 .custom-file-input {
-  width:100px;
+  width: 80px;
 }
 .custom-file {
-  width:100px;
+  width: 80px;
 }
 #video-player {
-
   .modal-content {
     width: auto;
     margin: 0 auto;
   }
   .modal-body {
     @include flexbox(row, center, center);
+  }
+}
+
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 20;
+}
+@media screen and (max-width: 550px) {
+  .dashboard-box {
+    width: auto;
+  }
+  .video-grid {
+    display: flex;
+    flex-direction: column;
+    grid-gap: 0;
+  }
+  .nav-container {
+    padding-left: 24px;
+    padding-right: 24px;
+    position: absolute;
+    bottom: 0;
+  }
+  #video-player {
+    .modal-content {
+      max-width: 90vw;
+      video {
+        width: 85vw;
+      }
+    }
   }
 }

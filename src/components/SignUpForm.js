@@ -7,10 +7,11 @@ import axios from 'axios';
 
 const init = {
   username: '',
-  password: ''
+  password: '',
+  cpassword: ''
 }
 
-const LoginForm = () => {
+const SignUpForm = () => {
 
   const [c, setCookie] = useCookies();
 
@@ -20,37 +21,48 @@ const LoginForm = () => {
 
   const [text, setText] = useState(init)
   const [err, setErr] = useState('');
+
   const [load, setLoad] = useState(false);
 
   const history = useHistory();
 
   const submitForm = async (e) => {
-    setLoad(true);
     e.preventDefault();
-
-    // if (!text.username || !text.password) return setErr('Fields cannot be empty');
+    setLoad(true);
+    if (text.cpassword !== text.password)
+      return setErr('Passwords must match');
+    if (!text.username || !text.password)
+      return setErr('Fields cannot be empty');
     // const username = process.env.REACT_APP_SAMPLE_USER;
     // const password = process.env.REACT_APP_SAMPLE_PASS;
-    // if (username === text.username && password === text.password) {
-
     try {
-      const res = await axios.post('/api/auth', text);
+      const res = await axios
+        .post('/api/signup', {
+          username: text.username,
+          password: text.password
+        });
+      console.log(res);
       const {
+        msg,
         err,
-        data,
-        msg
+        data
       } = res.data;
       if (data) {
+
         authenticate(data.id || text.username);
         setCookie('auth', data.id, '/')
         return history.push('/home');
-      }
-      else if (err) {
-        setErr(msg);
-      }
+
+      } else
+        if (err)
+          return setErr(msg)
+
     } catch (er) {
       console.error(er);
     }
+    // if (username === text.username && password === text.password) {
+    // }
+    // else setErr('Invalid login attempt');
     setLoad(false);
   }
 
@@ -88,11 +100,19 @@ const LoginForm = () => {
             onChange={handleChange}
           />
         </Form.Group>
+        <Form.Group>
+          <Form.Label>
+            Confirm Password:
+          </Form.Label>
+          <Form.Control
+            name='cpassword'
+            type='password'
+            value={text.cpassword}
+            onChange={handleChange}
+          />
+        </Form.Group>
 
-        <Button
-          disabled={load}
-          type='submit'
-        >
+        <Button type='submit' disabled={load}>
           {load ?
             <div
               style={{
@@ -106,15 +126,16 @@ const LoginForm = () => {
                   color: 'white'
                 }}
               />
+
             </div>
             :
-            'Login'
+            'Register'
           }
         </Button>
         {
           !load &&
-          <Link to='/signup'>
-            Register
+          <Link to='/auth'>
+            Login
       </Link>
         }
       </Form>
@@ -123,4 +144,4 @@ const LoginForm = () => {
   );
 }
 
-export default LoginForm;
+export default SignUpForm;

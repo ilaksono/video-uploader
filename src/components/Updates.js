@@ -14,9 +14,8 @@ const Updates = () => {
     <>
 
       {
-        conMod &&
+        conMod.show &&
         <ConfirmModal
-          // handleConfirm={handleModalConfirm}
           conMod={conMod}
           resetConfirmModal={resetConfirmModal}
         />

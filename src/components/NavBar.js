@@ -17,7 +17,7 @@ const NavBar = () => {
 
   useEffect(() => {
     cookies.auth ?
-      authenticate() :
+      authenticate(cookies.auth) :
       logout();
   }, [])
 

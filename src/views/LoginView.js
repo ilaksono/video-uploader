@@ -1,7 +1,11 @@
 import LoginForm from 'components/LoginForm';
 import axios from 'axios'
+import { useLocation } from 'react-router-dom';
+import SignUpForm from 'components/SignUpForm';
 
 const LoginView = () => {
+
+  const { pathname } = useLocation();
 
   return (
     // <div classNameName='login-layout'>
@@ -19,7 +23,7 @@ const LoginView = () => {
         marginBottom: 24,
         color: '#2D2D2D'
       }}>
-        Log into your account
+        {pathname === '/auth' ? 'Log into ' : 'Create '}your account
           </div>
       <div className={`container`}
         style={{
@@ -28,7 +32,11 @@ const LoginView = () => {
         }}
       >
         <div className="widget-box login-box" >
-          <LoginForm />
+          {
+            pathname === '/auth' ? 
+            <LoginForm />
+            : <SignUpForm/>
+          }
         </div>
       </div>
     </div>

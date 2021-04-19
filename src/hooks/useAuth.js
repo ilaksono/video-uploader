@@ -1,15 +1,15 @@
 import {useState} from 'react';
 
 const useAuth = () => {
-  const [auth, setAuth] = useState(false);
+  const [auth, setAuth] = useState('');
 
 
-  const authenticate = () => {
-    setAuth(true);
+  const authenticate = (token) => {
+    setAuth(token);
   }
 
   const logout = () => {
-    setAuth(false);
+    setAuth('');
   }
 
   return {

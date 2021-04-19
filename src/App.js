@@ -8,8 +8,9 @@ import routes from 'routes';
 import NavBar from 'components/NavBar'
 import Updates from 'components/Updates'
 import AppContext from 'AppContext';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import VideoModal from 'components/VideoModal';
+import axios from 'axios'
 
 function App() {
 
@@ -24,7 +25,7 @@ function App() {
   }
 
   return (
-    <div>
+    <>
       <Router>
         <NavBar />
         <Switch>
@@ -38,8 +39,9 @@ function App() {
       <VideoModal
         onHide={onHide}
         show={play.show}
-        src={play.location} />
-    </div>
+        src={play.location}
+      />
+    </>
   );
 }
 
