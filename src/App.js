@@ -1,7 +1,8 @@
 import {
   BrowserRouter as Router,
   Redirect,
-  Switch, Route
+  Switch, Route,
+  useLocation
 } from 'react-router-dom';
 
 import routes from 'routes';
@@ -27,7 +28,10 @@ function App() {
   return (
     <>
       <Router>
-        <NavBar />
+        {
+          window.location.href.slice(-4) === 'home' &&
+          <NavBar />
+        }
         <Switch>
           {routes.map(each => <Route
             {...each}
